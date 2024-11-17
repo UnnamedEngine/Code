@@ -4,19 +4,7 @@ This is the security notice for this repository. The notice explains how vulnera
 
 ## Reporting a Vulnerability
 
-If you've found a vulnerability, we would like to know so we can fix it before it is released publicly.
-
-> [!WARNING]
-> **Do not open a GitHub issue for a found vulnerability**
-
-Send details to <zotydev@gmail.com> including:
-
-- The website, page or repository where the vulnerability can be observed
-- A brief description of the vulnerability
-- Optionally the type of vulnerability and any related [OWASP Category](https://owasp.org/www-project-top-ten/)
-- Non-destructive exploitation details
-
-We will do our best to reply as fast as possible.
+If you've found a vulnerability, we would like to know so we can fix it before it is released publicly, please [**Open a draft security advisory**](https://github.com/UnnamedEngine/Code/security/advisories/new).
 
 ## Scope
 
