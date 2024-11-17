@@ -1,0 +1,68 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["🕷️ Bug", "🔍 Triage"]
+projects: ["UnnamedEngine/2"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please, take your time and make this bug report as complete as possible, more details make it easier for us to fix wathever problems you are having, please fill all the required fields with attention to details and include everything that could be useful, even the little details.
+  - type: input
+    id: discord
+    attributes:
+      label: Discord Username
+      description: Your discord username in case we need to contact you for mor information
+      placeholder: discord username
+    validations:
+      required: false
+  - type: dropdown
+    id: clients
+    attributes:
+      label: Clients
+      description: What clients are you seeing the problem on?
+      multiple: true
+      options:
+        - Website
+        - Launcher
+        - Game
+    validations:
+      require: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: Browsers
+      description: What browsers are you seeing the problem on? (if applicable)
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Opera
+        - Opera GX
+        - Safari
+        - Other
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      Description: A complete and detailed explanation of what happened and what you expected to happen
+      placeholder: Tell us what you see!
+      value: "A bug happened while I was..."
+    validations:
+      require: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: How do you triggered this bug? Please walk us through it step by step
+      value: |
+        1.
+        2.
+        3.
+        ...
+      render: bash
+    validations:
+      required: true
