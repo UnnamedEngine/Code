@@ -1,0 +1,10 @@
+[package]
+name = "unen_backend"
+version.workspace = true
+edition.workspace = true
+
+################################################################################
+# DEPENDENCIES
+################################################################################
+[dependencies.anyhow]
+workspace = true
