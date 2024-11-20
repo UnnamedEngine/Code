@@ -1,0 +1,37 @@
+################################################################################
+# WORKSPACE CONFIG
+################################################################################
+[workspace]
+members = [
+  "apps/backend",
+]
+
+resolver = '2'
+[workspace.package]
+version = "0.0.1"
+edition = "2021"
+
+################################################################################
+# GENERAL CONFIG
+################################################################################
+# Optimize for speed and reduce size on release builds
+[profile.release]
+# Strip expensive panic clean-up logic
+panic = "abort"
+# Compile crates one after another so the compiler can optimize better
+codegen-units = 1
+# Enable link to optimizations
+lto = true
+# Optimize for binary size
+opt-level = "s"
+# Remove debug symbols
+strip = true
+
+################################################################################
+# DEPENDENCIES
+################################################################################
+[workspace.dependencies.thiserror]
+version = "2.0.3"
+
+[workspace.dependencies.anyhow]
+version = "1.0.93"
