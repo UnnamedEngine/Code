@@ -1,0 +1,26 @@
+ARG RUST_VERSION=1.82
+ARG PORT=3000
+################################################################################
+# BUILD
+################################################################################
+FROM rust:${RUST_VERSION} AS build
+
+WORKDIR /usr/src/app
+
+COPY Cargo.toml Cargo.lock ./
+COPY apps/backend ./apps/backend
+
+RUN cargo build --package unen_backend
+
+################################################################################
+# RUN BACKEND
+################################################################################
+FROM rust:${RUST_VERSION}-slim AS run
+
+WORKDIR /usr/src/app
+
+COPY --from=build /usr/src/app/target/debug/unen_backend .
+
+EXPOSE ${PORT}
+
+CMD ["./unen_backend"]

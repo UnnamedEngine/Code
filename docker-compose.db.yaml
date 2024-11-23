@@ -1,0 +1,25 @@
+services:
+  # Database
+  unen-database-db:
+    container_name: unen-database-db
+    image: postgres:17.0
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: unen
+      POSTGRES_USER: unen
+      POSTGRES_DB: unen
+    ports:
+      - 5432:5432
+
+  # Pgadmin
+  unen-pgadmin-db:
+    container_name: unen-pgadmin-db
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 5050:80
+    depends_on:
+      - unen-database-db
