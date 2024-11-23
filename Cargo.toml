@@ -35,3 +35,32 @@ version = "2.0.3"
 
 [workspace.dependencies.anyhow]
 version = "1.0.93"
+
+[workspace.dependencies.dotenvy]
+version = "0.15.7"
+
+[workspace.dependencies.log]
+version = "0.4.22"
+
+[workspace.dependencies.env_logger]
+version = "0.11.5"
+
+[workspace.dependencies.serde]
+version = "1.0.215"
+features = ["derive"]
+
+[workspace.dependencies.tokio]
+version = "1.41.1"
+features = ["full"]
+
+[workspace.dependencies.sqlx]
+version = "0.8.2"
+features = ["postgres", "runtime-tokio", "chrono", "macros"]
+
+[workspace.dependencies.chrono]
+version = "0.4.38"
+features = ["serde"]
+
+[workspace.dependencies.uuid]
+version = "1.11.0"
+features = ["v4", "fast-rng"]

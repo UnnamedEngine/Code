@@ -9,5 +9,8 @@
   },
   "[markdown]": {
     "editor.wordWrapColumn": 80,
+  },
+  "rust-analyzer.server.extraEnv": {
+    "DATABASE_URL": "postgres://unen:unen@localhost:5432/unen"
   }
 }
