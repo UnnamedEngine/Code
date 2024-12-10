@@ -5,7 +5,6 @@
 members = [
   "apps/backend",
 ]
-
 resolver = '2'
 [workspace.package]
 version = "0.0.1"
@@ -28,39 +27,113 @@ opt-level = "s"
 strip = true
 
 ################################################################################
-# DEPENDENCIES
+# ERROR
 ################################################################################
 [workspace.dependencies.thiserror]
-version = "2.0.3"
+version = "2.0.6"
 
 [workspace.dependencies.anyhow]
-version = "1.0.93"
+version = "1.0.94"
 
+################################################################################
+# ENVIRONMENT
+################################################################################
 [workspace.dependencies.dotenvy]
 version = "0.15.7"
 
+################################################################################
+# LOGGING
+################################################################################
 [workspace.dependencies.log]
 version = "0.4.22"
 
 [workspace.dependencies.env_logger]
 version = "0.11.5"
 
+################################################################################
+# CONCURRENCY
+################################################################################
+[workspace.dependencies.tokio]
+version = "1.42.0"
+features = ["full"]
+
+[workspace.dependencies.tokio-stream]
+version = "0.1.17"
+
+[workspace.dependencies.futures]
+version = "0.3.31"
+
+[workspace.dependencies.futures-timer]
+version = "3.0.3"
+
+[workspace.dependencies.futures-util]
+version = "0.3.31"
+
+[workspace.dependencies.async-trait]
+version = "0.1.83"
+
+################################################################################
+# ALGORITHM
+################################################################################
+[workspace.dependencies.rand]
+version = "0.8.5"
+
+[workspace.dependencies.rand_chacha]
+version = "0.3.1"
+
 [workspace.dependencies.serde]
 version = "1.0.215"
 features = ["derive"]
 
-[workspace.dependencies.tokio]
-version = "1.41.1"
-features = ["full"]
+[workspace.dependencies.serde_json]
+version = "1.0.133"
 
-[workspace.dependencies.sqlx]
-version = "0.8.2"
-features = ["postgres", "runtime-tokio", "chrono", "macros"]
+################################################################################
+# DATA
+################################################################################
+[workspace.dependencies.dashmap]
+version = "6.1.0"
 
+################################################################################
+# TIME
+################################################################################
 [workspace.dependencies.chrono]
-version = "0.4.38"
+version = "0.4.39"
 features = ["serde"]
 
-[workspace.dependencies.uuid]
-version = "1.11.0"
-features = ["v4", "fast-rng"]
+################################################################################
+# STRING MANIPULATION
+################################################################################
+[workspace.dependencies.censor]
+version = "0.3.0"
+
+################################################################################
+# DATABASE
+################################################################################
+[workspace.dependencies.sqlx]
+version = "0.8.2"
+features = [
+  "runtime-tokio-rustls",
+  "postgres",
+  "chrono",
+  "macros",
+  "migrate",
+  "json",
+  ]
+
+[workspace.dependencies.redis]
+version = "0.27.6"
+features = ["tokio-comp", "ahash", "r2d2"]
+
+[workspace.dependencies.deadpool-redis]
+version = "0.18.0"
+
+################################################################################
+# HTTP
+################################################################################
+[workspace.dependencies.tower-http]
+version = "0.6.2"
+features = ["full"]
+
+[workspace.dependencies.axum]
+version = "0.7.9"

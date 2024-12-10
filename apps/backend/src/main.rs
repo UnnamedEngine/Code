@@ -1,9 +1,4 @@
-use anyhow::Context;
-use sqlx::postgres::PgPoolOptions;
-
-pub mod models;
-pub mod db;
-mod tests;
+use unen_backend::database::{self, redis::RedisPool};
 
 /// Start the logger using ENV values.
 pub fn start_logger() {
@@ -20,28 +15,39 @@ async fn main() {
     // Start logger
     start_logger();
 
-    // Read `DATABASE_URL` from .env
-    let database_url = std::env::var("DATABASE_URL")
-        .expect("DATABASE_URL must be set");
-
-    // Create a connection pool
-    let pool = PgPoolOptions::new()
-        .max_connections(5)
-        .connect(&database_url)
+    // Database Migrations
+    database::check_for_migrations()
         .await
-        .context("failed to connect to the database");
+        .expect("An error occurred while running migrations.");
 
-    match pool {
-        Ok(pool) => {
-            if let Err(e) = sqlx::migrate!()
-                .run(&pool)
-                .await
-                .context("failed to run migrations") {
-                    log::error!("{}", e);
-                }
-        },
-        Err(e) => {
-            log::error!("{}", e);
-        },
-    }
+    // Database Connector
+    let database_pool = database::connect()
+        .await
+        .expect("Database connection failed.");
+
+    // Redis Connection
+    let redis_pool = RedisPool::new(None);
+
+    let app_config = unen_backend::app_setup(
+        database_pool,
+        redis_pool,
+    );
+
+    log::info!("Starting Axum HTTP server!");
+
+    // Init App
+    let app = unen_backend::app_config(app_config);
+
+    // Run App with hypr
+    let bind_address = dotenvy::var("BIND_ADDR")
+        .expect("`BIND_ADDR` not set.");
+    let self_address = dotenvy::var("SELF_ADDR")
+        .expect("`SELF_ADDR` not set.");
+    log::info!("Listening at: {}", self_address);
+    let listener = tokio::net::TcpListener::bind(bind_address)
+        .await
+        .expect("Failed to bind App listener.");
+    axum::serve(listener, app)
+        .await
+        .expect("Failed to serve App.");
 }

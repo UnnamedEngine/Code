@@ -1,25 +1,64 @@
 services:
   # Database
-  unen-database-db:
-    container_name: unen-database-db
+  unen-postgres-db:
+    container_name: unen-postgres-db
     image: postgres:17.0
     restart: always
-    environment:
-      POSTGRES_PASSWORD: unen
-      POSTGRES_USER: unen
-      POSTGRES_DB: unen
     ports:
       - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=unen
+      - POSTGRES_USER=unen
+      - POSTGRES_DB=unen
 
   # Pgadmin
   unen-pgadmin-db:
     container_name: unen-pgadmin-db
     image: dpage/pgadmin4
     restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+      - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+    entrypoint: /bin/sh -c "chmod 600 /pgpass; /entrypoint.sh;"
+    user: root
+    configs:
+      - source: servers.json
+        target: /pgadmin4/servers.json
+      - source: pgpass
+        target: /pgpass
     depends_on:
-      - unen-database-db
+      - unen-postgres-db
+
+  # Redis
+  unen-redis-db:
+    container_name: unen-redis-db
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379
+
+# Configs
+configs:
+  # PgAdmin
+  pgpass:
+    content: unen-postgres-db:5432:unen:unen:unen
+  servers.json:
+    content: |
+      {
+        "Servers": {
+          "1": {
+            "Group": "Servers",
+            "Name": "UNEN",
+            "Host": "unen-postgres-db",
+            "Port": 5432,
+            "MaintenanceDB": "unen",
+            "Username": "unen",
+            "PassFile": "/pgpass",
+            "SSLMode": "prefer"
+          }
+        }
+      }

@@ -1,34 +1,108 @@
 [package]
-name = "unen_backend"
+name = "unen-backend"
 version.workspace = true
 edition.workspace = true
+license = "AGPL-3.0"
+
+[[bin]]
+name = "unen-backend"
+path = "src/main.rs"
 
 ################################################################################
-# DEPENDENCIES
+# ERROR
 ################################################################################
-[dependencies.anyhow]
+[dependencies.thiserror]
 workspace = true
 
+# [dependencies.anyhow]
+# workspace = true
+
+################################################################################
+# ENVIRONMENT
+################################################################################
 [dependencies.dotenvy]
 workspace = true
 
+################################################################################
+# LOGGING
+################################################################################
 [dependencies.log]
 workspace = true
 
 [dependencies.env_logger]
 workspace = true
 
-[dependencies.serde]
-workspace = true
-
+################################################################################
+# CONCURRENCY
+################################################################################
 [dependencies.tokio]
 workspace = true
 
-[dependencies.sqlx]
+[dependencies.tokio-stream]
 workspace = true
 
+[dependencies.futures]
+workspace = true
+
+[dependencies.futures-timer]
+workspace = true
+
+[dependencies.futures-util]
+workspace = true
+
+[dependencies.async-trait]
+workspace = true
+
+################################################################################
+# ALGORITHM
+################################################################################
+[dependencies.rand]
+workspace = true
+
+[dependencies.rand_chacha]
+workspace = true
+
+[dependencies.serde]
+workspace = true
+
+[dependencies.serde_json]
+workspace = true
+
+################################################################################
+# DATA
+################################################################################
+[dependencies.dashmap]
+workspace = true
+
+################################################################################
+# TIME
+################################################################################
 [dependencies.chrono]
 workspace = true
 
-[dependencies.uuid]
+################################################################################
+# STRING MANIPULATION
+################################################################################
+[dependencies.censor]
+workspace = true
+
+################################################################################
+# DATABASE
+################################################################################
+[dependencies.sqlx]
+workspace = true
+
+[dependencies.redis]
+workspace = true
+
+[dependencies.deadpool-redis]
+workspace = true
+
+################################################################################
+# HTTP
+################################################################################
+[dependencies.tower-http]
+workspace = true
+
+[dependencies.axum]
 workspace = true
