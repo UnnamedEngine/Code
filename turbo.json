@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["target/**"]
+    },
+    "lint": {
+      "env": ["SQLX_OFFLINE"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "inputs": ["$TURBO_DEFAULT$", ".env*"]
+    },
+    "test": {
+      "env": ["SQLX_OFFLINE", "DATABASE_URL"]
+    },
+    "fix": {
+      "cache": false
+    }
+  }
+}

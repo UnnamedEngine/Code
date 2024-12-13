@@ -126,15 +126,15 @@ pub mod base62_impl {
                 type Value = Base62Id;
 
                 fn expecting(
-                    &self, formatter:
-                    &mut std::fmt::Formatter,
+                    &self,
+                    formatter: &mut std::fmt::Formatter,
                 ) -> std::fmt::Result {
                     formatter.write_str("a base62 string id")
                 }
 
                 fn visit_str<E>(self, string: &str) -> Result<Self::Value, E>
-                    where
-                        E: de::Error,
+                where
+                    E: de::Error,
                 {
                     parse_base62(string).map(Base62Id).map_err(E::custom)
                 }
@@ -146,8 +146,8 @@ pub mod base62_impl {
 
     impl Serialize for Base62Id {
         fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-            where
-                S: Serializer,
+        where
+            S: Serializer,
         {
             serializer.serialize_str(&to_base62(self.0))
         }

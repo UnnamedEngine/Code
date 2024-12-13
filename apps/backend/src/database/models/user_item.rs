@@ -65,12 +65,7 @@ impl Status {
         .await?;
 
         redis
-            .set_serialized_to_json(
-                "account",
-                "status",
-                &result,
-                None,
-            )
+            .set_serialized_to_json("account", "status", &result, None)
             .await?;
 
         Ok(result)

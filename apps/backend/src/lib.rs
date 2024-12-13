@@ -1,8 +1,8 @@
 use axum::{Extension, Router};
 use database::redis::RedisPool;
 
-pub mod models;
 pub mod database;
+pub mod models;
 pub mod routes;
 
 #[derive(Clone)]
@@ -26,9 +26,7 @@ pub fn app_setup(
     }
 }
 
-pub fn app_config(
-    app_config: AppConfig,
-) -> Router {
+pub fn app_config(app_config: AppConfig) -> Router {
     Router::new()
         .merge(routes::root())
         .layer(Extension(app_config.database_pool))

@@ -62,10 +62,7 @@ impl From<DBUser> for User {
 }
 
 impl User {
-    pub fn from_full(
-        db_user: DBUser,
-        db_status: DBStatus,
-    ) -> Self {
+    pub fn from_full(db_user: DBUser, db_status: DBStatus) -> Self {
         Self {
             id: UserId::from(db_user.id),
             status: Some(Status::from_full(db_status)),

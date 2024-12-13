@@ -1,4 +1,11 @@
-use std::{collections::HashMap, fmt::{Debug, Display}, future::Future, hash::Hash, pin::Pin, time::Duration};
+use std::{
+    collections::HashMap,
+    fmt::{Debug, Display},
+    future::Future,
+    hash::Hash,
+    pin::Pin,
+    time::Duration,
+};
 
 use chrono::{TimeZone, Utc};
 use dashmap::DashMap;
@@ -76,14 +83,12 @@ impl RedisPool {
             + DeserializeOwned
             + Serialize,
     {
-        Ok(
-            self
-                .get_cached_keys_raw(namespace, keys, closure)
-                .await?
-                .into_iter()
-                .map(|x| x.1)
-                .collect()
-        )
+        Ok(self
+            .get_cached_keys_raw(namespace, keys, closure)
+            .await?
+            .into_iter()
+            .map(|x| x.1)
+            .collect())
     }
 
     pub async fn get_cached_keys_raw<F, Fut, T, K>(
@@ -111,13 +116,11 @@ impl RedisPool {
             false,
             keys,
             |ids| async move {
-                Ok(
-                    closure(ids)
-                        .await?
-                        .into_iter()
-                        .map(|(key, val)| (key, (None::<String>, val)))
-                        .collect()
-                )
+                Ok(closure(ids)
+                    .await?
+                    .into_iter()
+                    .map(|(key, val)| (key, (None::<String>, val)))
+                    .collect())
             },
         )
         .await
@@ -146,8 +149,8 @@ impl RedisPool {
             + Serialize,
         S: Debug + Display + Clone + DeserializeOwned + Serialize,
     {
-        Ok(
-            self.get_cached_keys_raw_with_slug(
+        Ok(self
+            .get_cached_keys_raw_with_slug(
                 namespace,
                 Some(slug_namespace),
                 case_sensitive,
@@ -157,8 +160,7 @@ impl RedisPool {
             .await?
             .into_iter()
             .map(|x| x.1)
-            .collect()
-        )
+            .collect())
     }
 
     pub async fn get_cached_keys_raw_with_slug<F, Fut, T, I, K, S>(
@@ -491,7 +493,6 @@ impl RedisPool {
 
         Ok(cached_values.into_iter().map(|x| (x.0, x.1.val)).collect())
     }
-
 }
 
 impl RedisConnection {

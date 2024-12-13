@@ -12,5 +12,10 @@
   },
   "rust-analyzer.server.extraEnv": {
     "DATABASE_URL": "postgres://unen:unen@localhost:5432/unen"
-  }
+  },
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ]
 }

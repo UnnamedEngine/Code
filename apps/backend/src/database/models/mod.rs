@@ -14,7 +14,7 @@ pub enum DatabaseError {
     #[error("Error while interacting with the cache: {0}")]
     Cache(#[from] redis::RedisError),
     #[error("Redis Pool Error: {0}")]
-    RedisPool(#[from]deadpool_redis::PoolError),
+    RedisPool(#[from] deadpool_redis::PoolError),
     #[error("Error while serializing with the cache: {0}")]
     SerdeCacheError(#[from] serde_json::Error),
     #[error("Schema error: {0}")]
