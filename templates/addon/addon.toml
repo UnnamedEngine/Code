@@ -1,0 +1,79 @@
+# Root section of the config file
+[addon]
+# A title can be anything and can include any character.
+# REQUIRED
+title = "Addon Template 🦄"
+# The slug only accept alphabetical lowercase ascii characters and numbers, and
+# the `_` character.
+# REQUIRED
+slug = "addon_template"
+# Must be in the following format:
+# <NUMBER>.<NUMBER>.<NUMBER><a = alpha | b = beta (optional)>
+# REQUIRED
+version = "0.0.1a"
+# A short description about the addon.
+# REQUIRED
+description = "This is a default template to help you create addons."
+# The ISO code for the supported languages.
+# REQUIRED
+languages = ["en-US", "pt-BR"]
+# Repository URL.
+# REQUIRED
+repo = "https://github.com/UnnamedEngine/Code/tree/main/templates/addon"
+# Where bugs should be reported.
+# REQUIRED
+bugs = "https://github.com/UnnamedEngine/Code/issues"
+# Website URL.
+# OPTIONAL
+url = "https://example.com"
+
+# Here you should list all the authors of this project.
+# REQUIRED
+[authors.ZotyDev]
+# Wich roles the author fullfiled during development.
+# REQUIRED
+roles = ["author"]
+# Contact email.
+# OPTIONAL
+email = "zotydev@gmail.com"
+# Discord username.
+# OPTIONAL
+discord = "zotydev"
+# Website URL.
+# OPTIONAL
+url = "zoty.dev"
+
+# Dependencies that are required for the addon to work.
+# OPTIONAL
+[dependencies.required.core]
+# Minimum required version.
+# REQUIRED
+min = "1.0.0"
+# Maximum supported version.
+# OPTIONAL
+max = "1.0.0"
+# Specific versions that will be excluded
+# OPTIONAL
+exclude = ["1.0.0a", "1.0.0b"]
+# Specific versions that will be included
+# OPTIONAL
+include = ["1.0.1a"]
+
+# Dependencies that can be used by the addon if loaded.
+# OPTIONAL
+[dependencies.optional.core]
+# Works exactly like the required dependencies.
+min = "1.0.0"
+max = "1.0.0"
+exclude = ["1.0.0a", "1.0.0b"]
+include = ["1.0.1a"]
+
+# Dependencies that are incompatible with this project.
+# OPTIONAL
+[dependencies.incompatible]
+# Works like the required dependencies, the only difference is that everything
+# is optional.
+min = "1.0.0"
+max = "1.0.0"
+exclude = ["1.0.0a", "1.0.0b"]
+include = ["1.0.1a"]
