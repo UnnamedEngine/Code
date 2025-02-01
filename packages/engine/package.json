@@ -1,0 +1,10 @@
+{
+  "name": "@unnamedengine/engine",
+  "scripts": {
+    "build": "cargo build --release",
+    "dev": "cargo run",
+    "lint": "cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings",
+    "test": "cargo test",
+    "fix": "cargo fmt && cargo clippy --fix"
+  }
+}

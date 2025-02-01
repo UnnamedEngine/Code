@@ -1,0 +1,11 @@
+[package]
+name = "unen-client"
+version.workspace = true
+edition.workspace = true
+license = "AGPL-3.0"
+
+################################################################################
+# ENGINE
+################################################################################
+[dependencies.unen-engine]
+path = "../../packages/engine"

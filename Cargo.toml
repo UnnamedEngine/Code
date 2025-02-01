@@ -3,6 +3,8 @@
 ################################################################################
 [workspace]
 members = [
+  "packages/engine",
+  "apps/client",
   "apps/backend",
 ]
 resolver = '2'
@@ -27,13 +29,16 @@ opt-level = "s"
 strip = true
 
 ################################################################################
+# TESTING
+################################################################################
+[workspace.dependencies.serial_test]
+version = "3.1.1"
+
+################################################################################
 # ERROR
 ################################################################################
 [workspace.dependencies.thiserror]
-version = "2.0.6"
-
-[workspace.dependencies.anyhow]
-version = "1.0.94"
+version = "2.0.11"
 
 ################################################################################
 # ENVIRONMENT
@@ -45,17 +50,19 @@ version = "0.15.7"
 # LOGGING
 ################################################################################
 [workspace.dependencies.log]
-version = "0.4.22"
+version = "0.4.25"
 
 [workspace.dependencies.env_logger]
-version = "0.11.5"
+version = "0.11.6"
 
 ################################################################################
 # CONCURRENCY
 ################################################################################
 [workspace.dependencies.tokio]
-version = "1.42.0"
-features = ["full"]
+version = "1.43.0"
+features = [
+  "full",
+]
 
 [workspace.dependencies.tokio-stream]
 version = "0.1.17"
@@ -70,7 +77,10 @@ version = "3.0.3"
 version = "0.3.31"
 
 [workspace.dependencies.async-trait]
-version = "0.1.83"
+version = "0.1.86"
+
+[workspace.dependencies.crossbeam]
+version = "0.8.4"
 
 ################################################################################
 # ALGORITHM
@@ -81,12 +91,20 @@ version = "0.8.5"
 [workspace.dependencies.rand_chacha]
 version = "0.3.1"
 
+[workspace.dependencies.strum]
+version = "0.26.3"
+features = [
+  "derive",
+]
+
 [workspace.dependencies.serde]
-version = "1.0.215"
-features = ["derive"]
+version = "1.0.217"
+features = [
+  "derive",
+]
 
 [workspace.dependencies.serde_json]
-version = "1.0.133"
+version = "1.0.138"
 
 ################################################################################
 # DATA
@@ -99,7 +117,9 @@ version = "6.1.0"
 ################################################################################
 [workspace.dependencies.chrono]
 version = "0.4.39"
-features = ["serde"]
+features = [
+  "serde",
+]
 
 ################################################################################
 # STRING MANIPULATION
@@ -111,7 +131,7 @@ version = "0.3.0"
 # DATABASE
 ################################################################################
 [workspace.dependencies.sqlx]
-version = "0.8.2"
+version = "0.8.3"
 features = [
   "runtime-tokio-rustls",
   "postgres",
@@ -123,7 +143,11 @@ features = [
 
 [workspace.dependencies.redis]
 version = "0.27.6"
-features = ["tokio-comp", "ahash", "r2d2"]
+features = [
+  "tokio-comp",
+  "ahash",
+  "r2d2",
+]
 
 [workspace.dependencies.deadpool-redis]
 version = "0.18.0"
@@ -133,7 +157,15 @@ version = "0.18.0"
 ################################################################################
 [workspace.dependencies.tower-http]
 version = "0.6.2"
-features = ["full"]
+features = [
+  "full",
+]
 
 [workspace.dependencies.axum]
-version = "0.7.9"
+version = "0.8.1"
+
+################################################################################
+# RENDERING
+################################################################################
+[workspace.dependencies.winit]
+version = "0.30.8"
