@@ -19,6 +19,7 @@ pub use window_event::WindowEvent;
 /// There **is** a naming convention for any `Event`:
 ///
 /// - past-sentence names are refered to events that already occurred.
+///
 /// Other events are yet to occurr and reacting to them can have some sort of
 /// influence on the final result.
 ///
