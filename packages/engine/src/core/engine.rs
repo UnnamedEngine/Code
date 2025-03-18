@@ -47,7 +47,7 @@ impl Default for Engine {
         // The logger is started here to make sure we have logging always
         // available
 
-        // We do not want a env_logger during tests
+        // We do not want an env_logger during tests
         #[cfg(not(test))]
         {
             // Read the env values that configure the logger
@@ -103,6 +103,7 @@ impl Engine {
         match self.data.state {
             EngineState::Running => {
                 self.data.state = EngineState::Stopping;
+                self.dispatch(Event::Engine(event::EngineEvent::Shutdown));
                 self.stop();
             }
             _ => {
@@ -125,14 +126,14 @@ impl Engine {
     pub fn start(&mut self) {
         // TODO: there should be something here to start the engine
         self.data.state = EngineState::Running;
-        log::info!("Successfully started engine");
+        self.dispatch(Event::Engine(event::EngineEvent::Started));
     }
 
     /// Internal function that handles the engine's stop.
     pub fn stop(&mut self) {
         // TODO: there should be something hete to stop the engine
         self.data.state = EngineState::Stopped;
-        log::info!("Successfully stopped engine");
+        self.dispatch(Event::Engine(event::EngineEvent::Stopped));
     }
 
     /// Internal function that updates the engine.

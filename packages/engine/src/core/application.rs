@@ -105,6 +105,14 @@ impl ApplicationHandler for Application {
                 // Applications that redraw continously can render here instead.
                 self.window.as_ref().unwrap().request_redraw();
             }
+            WindowEvent::Resized(physical_size) => {
+                self.engine.dispatch(Event::Window(
+                    super::event::window_event::WindowEvent::Resized(
+                        physical_size.width,
+                        physical_size.height,
+                    ),
+                ));
+            }
             WindowEvent::KeyboardInput {
                 device_id: _,
                 event,
@@ -152,6 +160,23 @@ impl ApplicationHandler for Application {
                     ),
                 ));
             }
+            WindowEvent::MouseWheel {
+                device_id: _,
+                delta,
+                phase: _,
+            } => match delta {
+                winit::event::MouseScrollDelta::LineDelta(
+                    vertical,
+                    horizontal,
+                ) => {
+                    self.engine.dispatch(Event::Mouse(
+                        super::event::mouse_event::MouseEvent::Scroll(
+                            vertical, horizontal,
+                        ),
+                    ));
+                }
+                winit::event::MouseScrollDelta::PixelDelta(_) => (),
+            },
             _ => (),
         }
     }
