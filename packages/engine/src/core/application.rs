@@ -11,6 +11,7 @@ use super::{
         event_handler::{EventHandler, RawCallback},
         Event,
     },
+    Error,
 };
 
 pub struct Application {
@@ -36,21 +37,18 @@ impl Application {
         }
     }
 
-    pub fn run(&mut self) {
+    pub fn run(&mut self) -> Result<(), Error> {
         // Start the engine
-        self.engine.run();
+        self.engine.run()?;
 
         // Creates the event loop and sets it to `ControlFlow::Poll`, that way
         // we continously run the event loop
         let event_loop = EventLoop::new().unwrap();
         event_loop.set_control_flow(ControlFlow::Poll);
 
-        match event_loop.run_app(self) {
-            Ok(_) => {}
-            Err(err) => {
-                log::error!("Failed to run event_loop: {}", err.to_string());
-            }
-        }
+        event_loop.run_app(self)?;
+
+        Ok(())
     }
 
     /// Sets the `EventHandler`.
@@ -77,7 +75,7 @@ impl ApplicationHandler for Application {
     ) {
         match event {
             WindowEvent::CloseRequested => {
-                self.engine.shutdown();
+                let _ = self.engine.shutdown();
             }
             WindowEvent::RedrawRequested => {
                 // Redraw the application

@@ -168,4 +168,4 @@ version = "0.8.1"
 # RENDERING
 ################################################################################
 [workspace.dependencies.winit]
-version = "0.30.8"
+version = "0.30.9"
