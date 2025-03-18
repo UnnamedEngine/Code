@@ -8,6 +8,8 @@ pub enum MouseEvent {
     Pressed(MouseButton),
     /// The attached `MouseButton` was released.
     Released(MouseButton),
-    /// The mouse was moved
+    /// The mouse was moved.
     Moved(u32, u32),
+    /// The wheel was moved.
+    Scroll(f32, f32),
 }
