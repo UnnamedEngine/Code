@@ -59,7 +59,7 @@ version = "0.11.6"
 # CONCURRENCY
 ################################################################################
 [workspace.dependencies.tokio]
-version = "1.43.0"
+version = "1.44.2"
 features = [
   "full",
 ]
